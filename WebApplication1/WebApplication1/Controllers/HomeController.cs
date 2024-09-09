@@ -11,6 +11,7 @@ namespace WebApplication1.Controllers
 		public ActionResult Index()
 		{
 			//change in stage
+			//feature 2
 			return View();
 		}
 
