@@ -1,0 +1,41 @@
+name: .NET Framework CI
+
+on:
+  push:
+    branches: [ "main" ]
+ # pull_request:
+ #   branches: [ "main" ]
+
+
+jobs:
+  build:
+    runs-on: Runner
+    #runs-on: [ windows-latest ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: setup-msbuild
+      uses: microsoft/setup-msbuild@v2
+
+
+    - name: Build the Solution
+      shell: cmd
+      run: |
+        msbuild  WebApplication1/WebApplication1.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
+
+
+    - name: Run Tests
+      shell: cmd
+      run: |
+        ${{ env.vstest }}  "WebApplication1\WebApplication1.Tests\bin\Release\WebApplication1.Tests.dll"
+      env:
+        vstest: 'C:\"Program Files"\"Microsoft Visual Studio"\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
+
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: EZRepBundle
+        path: "./_build"    
