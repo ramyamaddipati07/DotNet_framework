@@ -32,10 +32,3 @@ jobs:
         ${{ env.vstest }}  "WebApplication1\WebApplication1.Tests\bin\Release\WebApplication1.Tests.dll"
       env:
         vstest: 'C:\"Program Files"\"Microsoft Visual Studio"\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
-
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: EZRepBundle
-        path: "./_build"    
