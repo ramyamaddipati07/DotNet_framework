@@ -1,34 +1,49 @@
-name: .NET Framework CI
+name: Basic Workflow with Variables
 
 on:
-  push:
-    branches: [ "master" ]
- # pull_request:
- #   branches: [ "main" ]
+  #push:
+   # branches: [ "main" ]  # Runs on push to main branch
+  workflow_dispatch:       # Allows manual trigger
 
+env:
+  WORKFLOW_LEVEL_VAR: "This is a workflow-level variable"  # Workflow-level variable
 
 jobs:
   build:
-    runs-on: Runner
-    #runs-on: [ windows-latest ]
+    runs-on: ubuntu-latest
+    env:
+      JOB_LEVEL_VAR: "This is a job-level variable"  # Job-level variable
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4.2.2
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v2
+      - name: Step Level Variable
+        env:
+          STEP_LEVEL_VAR: "This is a step-level variable"  # Step-level variable
+        run: |
+          echo "Workflow Variable: $WORKFLOW_LEVEL_VAR"
+          echo "Job Variable: $JOB_LEVEL_VAR"
+          echo "Step Variable: $STEP_LEVEL_VAR"
+
+      - name: Print GitHub Variables
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Actor: ${{ github.actor }}"
 
 
-    - name: Build the Solution
-      shell: cmd
-      run: |
-        msbuild  WebApplication1/WebApplication1.sln /nologo /nr:false /p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=True /p:platform="Any CPU" /p:configuration="Release" /p:PublishUrl="../_build"
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      JOB_LEVEL_DEPLOY_VAR: "Deploying application"
 
-
-    - name: Run Tests
-      shell: cmd
-      run: |
-        ${{ env.vstest }}  "WebApplication1\WebApplication1.Tests\bin\Release\WebApplication1.Tests.dll"
-      env:
-        vstest: 'C:\"Program Files"\"Microsoft Visual Studio"\2022\Professional\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe'
+    steps:
+      - name: Deploy Step
+        env:
+          STEP_LEVEL_DEPLOY_VAR: "Step-level deployment variable"
+        run: |
+          echo "Workflow Variable: $WORKFLOW_LEVEL_VAR"
+          echo "Job Variable: $JOB_LEVEL_DEPLOY_VAR"
+          echo "Step Variable: $STEP_LEVEL_DEPLOY_VAR"
