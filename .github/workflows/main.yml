@@ -7,12 +7,14 @@ on:
 
 env:
   WORKFLOW_LEVEL_VAR: "This is a workflow-level variable"  # Workflow-level variable
+  Var: "Hi From Workflow" 
 
 jobs:
   build:
     runs-on: ubuntu-latest
     env:
       JOB_LEVEL_VAR: "This is a job-level variable"  # Job-level variable
+      Var: "Hi From Job"
 
     steps:
       - name: Checkout Code
@@ -21,10 +23,12 @@ jobs:
       - name: Step Level Variable
         env:
           STEP_LEVEL_VAR: "This is a step-level variable"  # Step-level variable
+          Var: "Hi From Step"
         run: |
           echo "Workflow Variable: $WORKFLOW_LEVEL_VAR"
           echo "Job Variable: $JOB_LEVEL_VAR"
           echo "Step Variable: $STEP_LEVEL_VAR"
+          echo "Var : $Var"
 
       - name: Print GitHub Variables
         run: |
