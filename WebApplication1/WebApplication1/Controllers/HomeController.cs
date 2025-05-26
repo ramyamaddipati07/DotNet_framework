@@ -11,7 +11,11 @@ namespace WebApplication1.Controllers
 		public ActionResult Index()
 		{
 			//change in stage
+
 			//change 2 in feature 2
+
+			//feature 2
+
 			return View();
 		}
 

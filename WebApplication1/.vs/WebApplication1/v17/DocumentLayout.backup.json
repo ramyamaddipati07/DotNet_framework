@@ -3,10 +3,6 @@
   "WorkspaceRootPath": "D:\\MyWork\\CodeAnt AI\\Actions_frameworkproject\\DotNet_framework\\WebApplication1\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{262447E8-2AFE-4643-B6F6-11F1D449F550}|WebApplication1\\WebApplication1.csproj|d:\\mywork\\codeant ai\\actions_frameworkproject\\dotnet_framework\\webapplication1\\webapplication1\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{262447E8-2AFE-4643-B6F6-11F1D449F550}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\views\\product\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{262447E8-2AFE-4643-B6F6-11F1D449F550}|WebApplication1\\WebApplication1.csproj|d:\\mywork\\codeant ai\\actions_frameworkproject\\dotnet_framework\\webapplication1\\webapplication1\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{262447E8-2AFE-4643-B6F6-11F1D449F550}|WebApplication1\\WebApplication1.csproj|solutionrelative:webapplication1\\controllers\\productcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -59,19 +55,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\MyWork\\CodeAnt AI\\Actions_frameworkproject\\DotNet_framework\\WebApplication1\\WebApplication1\\Views\\Product\\Index.cshtml",
-              "RelativeDocumentMoniker": "WebApplication1\\Views\\Product\\Index.cshtml",
-              "ToolTip": "D:\\MyWork\\CodeAnt AI\\Actions_frameworkproject\\DotNet_framework\\WebApplication1\\WebApplication1\\Views\\Product\\Index.cshtml",
-              "RelativeToolTip": "WebApplication1\\Views\\Product\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-26T05:25:47.19Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "ProductController.cs",
               "DocumentMoniker": "D:\\MyWork\\CodeAnt AI\\Actions_frameworkproject\\DotNet_framework\\WebApplication1\\WebApplication1\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "WebApplication1\\Controllers\\ProductController.cs",
