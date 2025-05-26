@@ -21,6 +21,8 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Default/Create
+
+        //for practice
         public ActionResult Create()
         {
             return View();
