@@ -7,6 +7,7 @@ namespace YourProjectName.Controllers
 	public class ProductsController : Controller
 	{
 		// Dummy product list (simulate database)
+  //checkt the comments
 		private static List<Product> products = new List<Product>
 		{
 			new Product { Id = 1, Name = "Pen", Price = 10 },
