@@ -1,8 +1,8 @@
 name: Basic Workflow with Variables
 
 on:
-  #push:
-   # branches: [ "main" ]  # Runs on push to main branch
+  push:
+    branches: [ "main" ]  # Runs on push to main branch
   workflow_dispatch:       # Allows manual trigger
 
 env:

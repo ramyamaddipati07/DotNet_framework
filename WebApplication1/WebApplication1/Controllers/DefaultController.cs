@@ -63,8 +63,10 @@ namespace WebApplication1.Controllers
             }
             catch
             {
+            
                 return View();
             }
+            
         }
 
         // GET: Default/Delete/5
@@ -83,10 +85,8 @@ namespace WebApplication1.Controllers
 
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+           
+            
         }
     }
 }
