@@ -6,49 +6,34 @@ on:
   # Runs on push to main branch
   #workflow_dispatch:       # Allows manual trigger
 
-env:
-  WORKFLOW_LEVEL_VAR: "This is a workflow-level variable"  # Workflow-level variable
-  Var: "Hi From Workflow" 
-
 jobs:
-  build:
+  codeant_ci_scan:
+    name: Run CodeAnt CI scan
     runs-on: ubuntu-latest
-    env:
-      JOB_LEVEL_VAR: "This is a job-level variable"  # Job-level variable
-      Var: "Hi From Job"
-
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      - name: Step Level Variable
+      - name: Fetch CodeAnt scan script
         env:
-          STEP_LEVEL_VAR: "This is a step-level variable"  # Step-level variable
-          Var: "Hi From Step"
+          API_BASE: https://6nqmq4lcrzge2g6ljxdost5nwm0icajd.lambda-url.ap-south-1.on.aws
         run: |
-          echo "Workflow Variable: $WORKFLOW_LEVEL_VAR"
-          echo "Job Variable: $JOB_LEVEL_VAR"
-          echo "Step Variable: $STEP_LEVEL_VAR"
-          echo "Var : $Var"
+          curl -sS -X GET "${API_BASE}/analysis/ci/scan/script/get" \
+            --output start_scan.sh
 
-      - name: Print GitHub Variables
-        run: |
-          echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref }}"
-          echo "Actor: ${{ github.actor }}"
+      - name: Make script executable
+        run: chmod +x start_scan.sh
 
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    env:
-      JOB_LEVEL_DEPLOY_VAR: "Deploying application"
-
-    steps:
-      - name: Deploy Step
+      - name: Trigger CodeAnt analysis
         env:
-          STEP_LEVEL_DEPLOY_VAR: "Step-level deployment variable"
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}    # PAT or repo token
+          REPO_NAME:    ${{ github.repository }}       # e.g. org/repo
+          COMMIT_ID:    ${{ github.sha }}              # current commit SHA
         run: |
-          echo "Workflow Variable: $WORKFLOW_LEVEL_VAR"
-          echo "Job Variable: $JOB_LEVEL_DEPLOY_VAR"
-          echo "Step Variable: $STEP_LEVEL_DEPLOY_VAR"
+          bash start_scan.sh \
+            -a "$ACCESS_TOKEN" \
+            -r "$REPO_NAME" \
+            -c "$COMMIT_ID" \
+            -s github \
+            -i "" \
+            -e ""
