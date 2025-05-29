@@ -1,4 +1,4 @@
-name: Basic Workflow with Variables
+name: CodeAnt AI
 
 on:
   push:
