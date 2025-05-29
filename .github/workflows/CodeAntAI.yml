@@ -1,0 +1,37 @@
+name: Basic Workflow with Variables
+
+on:
+  push:
+    branches: [ "main stage" ]  # Runs on push to main branch
+  workflow_dispatch:       # Allows manual trigger
+jobs:
+  codeant_ci_scan:
+    name: Run CodeAnt CI scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Fetch CodeAnt scan script
+        env:
+          API_BASE: https://6nqmq4lcrzge2g6ljxdost5nwm0icajd.lambda-url.ap-south-1.on.aws
+        run: |
+          curl -sS -X GET "${API_BASE}/analysis/ci/scan/script/get" \
+            --output start_scan.sh
+
+      - name: Make script executable
+        run: chmod +x start_scan.sh
+
+      - name: Trigger CodeAnt analysis
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}    # PAT or repo token
+          REPO_NAME:    ${{ github.repository }}       # e.g. org/repo
+          COMMIT_ID:    ${{ github.sha }}              # current commit SHA
+        run: |
+          bash start_scan.sh \
+            -a "$ACCESS_TOKEN" \
+            -r "$REPO_NAME" \
+            -c "$COMMIT_ID" \
+            -s github \
+            -i "" \
+            -e ""
