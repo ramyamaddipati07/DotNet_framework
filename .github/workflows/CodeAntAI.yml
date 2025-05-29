@@ -2,8 +2,11 @@ name: Basic Workflow with Variables
 
 on:
   push:
-    branches: [ "main stage" ]  # Runs on push to main branch
+    branches: [ "main", "stage" ]  # Runs on push to main branch
   workflow_dispatch:       # Allows manual trigger
+  pull_request:
+    branches: [ "main" , "stage" ]
+   
 jobs:
   codeant_ci_scan:
     name: Run CodeAnt CI scan
