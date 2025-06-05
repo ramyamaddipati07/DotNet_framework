@@ -2,10 +2,15 @@ name: CodeAnt AI
 
 on:
   push:
+
     branches:
       - main  # or your default branch
-      - stage # Runs on push to main branch
+      #- stage # Runs on push to main branch
+      
   workflow_dispatch:       # Allows manual trigger
+  pull_request:
+    branches: [ "main" , "stage" ]
+   
 jobs:
   codeant_ci_scan:
     name: Run CodeAnt CI scan
